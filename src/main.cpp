@@ -50,7 +50,7 @@ int main() {
 
     TGraph *graph =  new TGraph(xvals.size(), &(xvals[0]), &(yvals[0]));
     graph->GetXaxis()->SetRangeUser(lo,hi);
-    TFitResultPtr fitResults = graph->Fit(f,"MENRS", "MINUIT2", lo, hi);
+    TFitResultPtr fitResults = graph->Fit(f,"MENRS", "", lo, hi);
     int fitStatus = fitResults;
 
     cout << "Fit Status : " << fitStatus << endl;
