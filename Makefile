@@ -14,7 +14,7 @@ LDLIBS = -ldl -lpthread
 c++SrcSuf = cpp
 
 #Add the root information to the compilation
-CXXFLAGS     += $(shell root-config --cflags) 
+CXXFLAGS     += $(shell root-config --cflags)
 LDFLAGS      += $(shell root-config --ldflags)
 LDLIBS       += $(shell root-config --libs)
 
@@ -25,9 +25,10 @@ PROGRAM = test
 #Define Objects
 MAINO = main.o
 VANDLETIMINGO = VandleTimingFunction.o
+TRACEO = Trace.o
 
 #Make the object list and prefix the object directory
-OBJS = $(MAINO) $(VANDLETIMINGO)
+OBJS = $(MAINO) $(VANDLETIMINGO) $(TRACEO)
 OBJDIR = obj
 OBJS_W_DIR = $(addprefix $(OBJDIR)/,$(OBJS))
 
@@ -47,6 +48,6 @@ $(OBJDIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: clean so
-clean: 
+clean:
 	@echo "Cleaning..."
 	@rm -f $(OBJDIR)/*.o $(PROGRAM) *~ src/*~ include/*~

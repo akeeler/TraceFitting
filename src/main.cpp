@@ -9,8 +9,10 @@
 #include <vector>
 
 #include <TApplication.h>
+#include <TAxis.h>
 #include <TGraph.h>
 #include <TF1.h>
+#include <TFitResult.h>
 
 #include "Trace.hpp"
 #include "VandleTimingFunction.hpp"
@@ -37,19 +39,21 @@ int main() {
         }
     }
 
-    auto max = max_element(yvals.begin(), yvals.end());
-    unsigned int maxPos = (unsigned int)(max - yvals.begin());
-    double maxVal = *max;
-
-
+    Trace trc(yvals);
+    int lo = trc.GetMaxPos() - 5;
+    int hi = trc.GetMaxPos() + 25;
 
     VandleTimingFunction *fobj = new VandleTimingFunction();
-    TF1 *f = new TF1("f",fobj,100,160,4,"VandleTimingFunction");
+    TF1 *f = new TF1("f", fobj, 0., 1000., 4, "VandleTimingFunction");
     f->SetLineColor(kRed);
-    f->SetParameters(108.9, 35000, 0.1, 0.1);
+    f->SetParameters(trc.GetMaxPos(), trc.GetQdc(), 1.0, 1.0);
 
     TGraph *graph =  new TGraph(xvals.size(), &(xvals[0]), &(yvals[0]));
-    graph->Fit(f,"MENR");
+    graph->GetXaxis()->SetRangeUser(lo,hi);
+    TFitResultPtr fitResults = graph->Fit(f,"MENRS", "MINUIT2", lo, hi);
+    int fitStatus = fitResults;
+
+    cout << "Fit Status : " << fitStatus << endl;
 
     graph->Draw();
     f->Draw("same");

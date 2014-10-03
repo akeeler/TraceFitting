@@ -15,11 +15,10 @@
 #include <TGraph.h>
 
 #include "Trace.hpp"
-#include "Vars.hpp"
 
 using namespace std;
 
-Trace::Trace(const vector<short unsigned int> &trc) {
+Trace::Trace(const vector<double> &trc) {
     waveformLow_ = 5;
     waveformHigh_ = 25;
     trc_ = trc;
@@ -29,8 +28,6 @@ Trace::Trace(const vector<short unsigned int> &trc) {
     CalcBaselineInfo();
     CalcWaveform();
     CalcQdc();
-    //CalcSnr();
-    CalcPhase();
 };
 
 void Trace::CalcBaselineInfo(void) {
@@ -43,12 +40,11 @@ void Trace::CalcBaselineInfo(void) {
         for(unsigned int i = 0; i < waveformLowSampleNum_; i++)
             baseline_ += trc_.at(i);
         baseline_ /= waveformLowSampleNum_;
-        
+
         for(unsigned int i = 0; i < waveformLowSampleNum_; i++)
             stddev_ += pow(trc_.at(i) - baseline_,2);
         stddev_ = sqrt(stddev_/waveformLowSampleNum_);
     }
-    cout << baseline_ << " " << stddev_ << " " << endl;
 }
 
 void Trace::CalcMaxInfo(void) {
@@ -57,32 +53,13 @@ void Trace::CalcMaxInfo(void) {
     maxVal_ = *max;
 }
 
-void Trace::CalcPhase(void) {
-    TF1 *traceFit = new TF1("traceFit", Trace::VandleFunction, 0.0, 
-                            (double)waveform_.size(), 2);
-    
-    vector<double> xvals;
-    for(unsigned int i = 0; i < waveform_.size(); i++) 
-        xvals.push_back(i);
-
-    TGraph *fitData = new TGraph(waveform_.size(), &(xvals[0]), &(waveform_[0]));
-
-
-    delete(fitData);
-    delete(traceFit);
-}
-
 void Trace::CalcQdc(void) {
     for(const auto it : waveform_)
         qdc_ += it;
 }
 
-void Trace::CalcSnr(void) {
-
-}
-
 void Trace::CalcWaveform(void) {
-    for(unsigned int i = waveformLowSampleNum_; 
+    for(unsigned int i = waveformLowSampleNum_;
         i <= waveformHighSampleNum_; i++)
         waveform_.push_back(trc_[i] - baseline_);
 }
@@ -91,21 +68,3 @@ void Trace::CalcWaveformBounds(void) {
     waveformLowSampleNum_ = maxPos_ - waveformLow_;
     waveformHighSampleNum_ = maxPos_ + waveformHigh_;
 }
-
-double Trace::VandleFunction(Double_t *x, Double_t *par) {
-    double beta = 0.17706971465472;
-    double gamma = 0.162673945899791;
-    
-    double phase = par[0];
-    double amplitude = par[1];
-    double diff = x[0] - phase;
-    
-    if(x[0] < phase)
-        return(0.0);
-
-    double val = qdc_ * amplitude * exp(-beta*diff) * 
-        (1-exp(-pow(gamma*diff,4.)));
-
-    return(val);
-}
-

@@ -10,31 +10,30 @@
 class Trace {
 public:
     Trace(){};
-    Trace(const std::vector<short unsigned int> &trc);
+    Trace(const std::vector<double> &trc);
     ~Trace(){};
 
-    double GetBaseline(void) {return(baseline_);};
-    double GetStdDevBase(void) {return(stddev_);};
-    double GetSnr(void) {return(snr_);};
-    double GetPhase(void) {return(phase_);};
+    double GetQdc(void){return(qdc_);};
+    double GetBaseline(void){return(baseline_);};
+    double GetWaveformLowSampleNum(void){return(waveformLowSampleNum_);};
+    double GetWaveformHighSampleNum(void){return(waveformHighSampleNum_);};
+    double GetMaxPos(void){return(maxPos_);};
+
     std::vector<double> GetWaveform(void) {return(waveform_);};
-    
+
 private:
     double baseline_, maxVal_, phase_, qdc_, snr_, stddev_;
-    unsigned int maxPos_, waveformLow_, waveformHigh_, waveformLowSampleNum_, 
+    unsigned int maxPos_, waveformLow_, waveformHigh_, waveformLowSampleNum_,
         waveformHighSampleNum_;
-    std::vector<short unsigned int> trc_;
+    std::vector<double> trc_;
     std::vector<double> waveform_;
 
     void CalcBaselineInfo(void);
     void CalcMaxInfo(void);
     void CalcPhase(void);
     void CalcQdc(void);
-    void CalcSnr(void);
     void CalcWaveform(void);
     void CalcWaveformBounds(void);
-   
-    double VandleFunction(Double_t *x, Double_t *par);
 };
 
 #endif //__TRACE_HPP__
