@@ -11,6 +11,6 @@ public:
     VandleTimingFunction() {};
     ~VandleTimingFunction(){};
 
-    double Evaluate() (double *x, double *p);
+    double operator() (double *x, double *p);
 };
 #endif

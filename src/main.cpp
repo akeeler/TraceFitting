@@ -3,20 +3,25 @@
  * \author S. V. Paulauskas
  * \date 03 October 2014
  */
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <vector>
 
+#include <TApplication.h>
 #include <TGraph.h>
 #include <TF1.h>
 
+#include "Trace.hpp"
 #include "VandleTimingFunction.hpp"
 
 using namespace std;
 
 int main() {
+    TApplication app("app", 0, 0);
+
     vector<double> xvals, yvals;
-    
+
     ifstream infile("data/plsr-nscl-revf.dat");
     if(!infile)
         cerr << "Cannot open input file. Try again, son." << endl;
@@ -32,6 +37,21 @@ int main() {
         }
     }
 
-    
-    
+    auto max = max_element(yvals.begin(), yvals.end());
+    unsigned int maxPos = (unsigned int)(max - yvals.begin());
+    double maxVal = *max;
+
+
+
+    VandleTimingFunction *fobj = new VandleTimingFunction();
+    TF1 *f = new TF1("f",fobj,100,160,4,"VandleTimingFunction");
+    f->SetLineColor(kRed);
+    f->SetParameters(108.9, 35000, 0.1, 0.1);
+
+    TGraph *graph =  new TGraph(xvals.size(), &(xvals[0]), &(yvals[0]));
+    graph->Fit(f,"MENR");
+
+    graph->Draw();
+    f->Draw("same");
+    app.Run(kTRUE);
 }
