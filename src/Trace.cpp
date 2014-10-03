@@ -20,7 +20,7 @@
  *  \author S. V. Paulauskas
  *  \date 27 March 2014
  *
- * Parts of this code are adopted from the pixie_scan code
+ * Parts of this code are based off of from the pixie_scan code
  * developed at the University of Tenneessee at Knoxville
  * by the Nuclear Structure group.
  */
