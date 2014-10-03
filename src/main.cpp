@@ -27,7 +27,7 @@
 
 #include <TApplication.h>
 #include <TAxis.h>
-#include <TGraph.h>
+#include <TGraphErrors.h>
 #include <TF1.h>
 #include <TFitResult.h>
 
@@ -37,8 +37,6 @@
 using namespace std;
 
 int main() {
-    TApplication app("app", 0, 0);
-
     vector<double> xvals, yvals;
 
     ifstream infile("data/plsr-nscl-revf.dat");
@@ -57,21 +55,24 @@ int main() {
     }
 
     Trace trc(yvals);
-    int lo = trc.GetMaxPos() - 5;
-    int hi = trc.GetMaxPos() + 25;
+    int lo = trc.GetMaxPos() - 10;
+    int hi = trc.GetMaxPos() + 30;
 
     VandleTimingFunction *fobj = new VandleTimingFunction();
     TF1 *f = new TF1("f", fobj, 0., 1000., 4, "VandleTimingFunction");
     f->SetLineColor(kRed);
-    f->SetParameters(trc.GetMaxPos(), trc.GetQdc(), 1.0, 1.0);
+    f->SetParameters(trc.GetMaxPos(), trc.GetQdc(), 0.1, 0.1);
 
-    TGraph *graph =  new TGraph(xvals.size(), &(xvals[0]), &(yvals[0]));
+    TGraphErrors *graph =  new TGraphErrors(xvals.size(), &(xvals[0]), &(yvals[0]));
+    for(unsigned int i = 0; i < xvals.size(); i++)
+        graph->SetPointError(i,0.0,trc.GetStandardDeviationBaseline());
     graph->GetXaxis()->SetRangeUser(lo,hi);
-    TFitResultPtr fitResults = graph->Fit(f,"MENRS", "", lo, hi);
+    TFitResultPtr fitResults = graph->Fit(f,"RS", "", lo, hi);
     int fitStatus = fitResults;
 
     cout << "Fit Status : " << fitStatus << endl;
 
+    TApplication app("app", 0, 0);
     graph->Draw();
     f->Draw("same");
     app.Run(kTRUE);

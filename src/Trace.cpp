@@ -36,8 +36,8 @@
 using namespace std;
 
 Trace::Trace(const vector<double> &trc) {
-    waveformLow_ = 5;
-    waveformHigh_ = 25;
+    waveformLow_ = 20;
+    waveformHigh_ = 30;
     trc_ = trc;
 
     CalcMaxInfo();

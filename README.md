@@ -20,3 +20,7 @@ Note 2
 -------
 It will be necessary to update the name of the file to be read. It is currently
 hard coded, but I'm not planning to change that for now.
+
+Note 3
+-------
+The baseline offset is also hard coded. That will need to be changed too.

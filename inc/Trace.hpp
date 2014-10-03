@@ -34,6 +34,7 @@ public:
     double GetBaseline(void){return(baseline_);};
     double GetWaveformLowSampleNum(void){return(waveformLowSampleNum_);};
     double GetWaveformHighSampleNum(void){return(waveformHighSampleNum_);};
+    double GetStandardDeviationBaseline(void){return(stddev_);};
     double GetMaxPos(void){return(maxPos_);};
 
     std::vector<double> GetWaveform(void) {return(waveform_);};
