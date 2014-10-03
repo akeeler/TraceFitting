@@ -17,7 +17,7 @@ using namespace std;
 int main() {
     vector<double> xvals, yvals;
     
-    ifstream inFile("data/plsr-nscl-revf.dat");
+    ifstream infile("data/plsr-nscl-revf.dat");
     if(!infile)
         cerr << "Cannot open input file. Try again, son." << endl;
     else {
