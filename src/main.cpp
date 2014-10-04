@@ -55,22 +55,27 @@ int main() {
     }
 
     Trace trc(yvals);
-    int lo = trc.GetMaxPos() - 10;
-    int hi = trc.GetMaxPos() + 30;
+    int lo = trc.GetMaxPos() - 5;
+    int hi = trc.GetMaxPos() + 40;
 
     VandleTimingFunction *fobj = new VandleTimingFunction();
     TF1 *f = new TF1("f", fobj, 0., 1000., 4, "VandleTimingFunction");
     f->SetLineColor(kRed);
-    f->SetParameters(trc.GetMaxPos(), trc.GetQdc(), 0.1, 0.1);
+    f->SetParameters(trc.GetMaxPos(), trc.GetQdc()*0.5, 1.0, 1.0);
 
-    TGraphErrors *graph =  new TGraphErrors(xvals.size(), &(xvals[0]), &(yvals[0]));
+    TGraphErrors *graph =
+        new TGraphErrors(xvals.size(), &(xvals[0]), &(yvals[0]));
+
     for(unsigned int i = 0; i < xvals.size(); i++)
         graph->SetPointError(i,0.0,trc.GetStandardDeviationBaseline());
+
     graph->GetXaxis()->SetRangeUser(lo,hi);
-    TFitResultPtr fitResults = graph->Fit(f,"RS", "", lo, hi);
+
+    TFitResultPtr fitResults = graph->Fit(f,"MENRS", "", lo, hi);
     int fitStatus = fitResults;
 
     cout << "Fit Status : " << fitStatus << endl;
+    cout << "QDC : " << trc.GetQdc() << endl;
 
     TApplication app("app", 0, 0);
     graph->Draw();
