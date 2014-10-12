@@ -30,8 +30,10 @@
 		</Compiler>
 		<Unit filename="Makefile" />
 		<Unit filename="README.md" />
+		<Unit filename="inc/EmCalTimingFunction.hpp" />
 		<Unit filename="inc/Trace.hpp" />
 		<Unit filename="inc/VandleTimingFunction.hpp" />
+		<Unit filename="src/EmCalTimingFunction.cpp" />
 		<Unit filename="src/Trace.cpp" />
 		<Unit filename="src/VandleTimingFunction.cpp" />
 		<Unit filename="src/main.cpp" />

@@ -29,5 +29,9 @@ public:
     ~VandleTimingFunction(){};
 
     double operator() (double *x, double *p);
+
+    void SetBaseline(const double &a){baseline_ = a;};
+private:
+    double baseline_;
 };
 #endif

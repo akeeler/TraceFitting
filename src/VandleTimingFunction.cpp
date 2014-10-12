@@ -35,10 +35,10 @@ double VandleTimingFunction::operator()(double *x, double *par) {
     double diff = x[0] - phase;
 
     if(x[0] < phase)
-        return(15217.6388888889);
+        return(baseline_);
 
     double val = amplitude * exp(-beta*diff) * (1-exp(-pow(gamma*diff,4.)))
-        +15217.6388888889;
+        + baseline_;
 
     return(val);
 }

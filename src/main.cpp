@@ -33,20 +33,22 @@
 
 #include "Trace.hpp"
 #include "VandleTimingFunction.hpp"
+#include "EmCalTimingFunction.hpp"
 
 using namespace std;
 
 int main() {
     vector<double> xvals, yvals;
 
-    ifstream infile("data/plsr-nscl-revf.dat");
+    ifstream infile("data/plsr-1000mV-02ns-num05.dat");
     if(!infile)
         cerr << "Cannot open input file. Try again, son." << endl;
     else {
         while(infile) {
             if (isdigit(infile.peek())) {
-                int junk, junk1;
-                infile >> junk >> junk1;
+                int junk, junk1, junk2;
+                infile >> junk >> junk1 >> junk2;
+                cout << junk << " " << junk1 << " " << junk2 << endl;
                 xvals.push_back(junk);
                 yvals.push_back(junk1);
             } else
@@ -54,12 +56,16 @@ int main() {
         }
     }
 
+    cout << yvals.size() << endl;
+
     Trace trc(yvals);
     int lo = trc.GetMaxPos() - 5;
     int hi = trc.GetMaxPos() + 40;
 
-    VandleTimingFunction *fobj = new VandleTimingFunction();
-    TF1 *f = new TF1("f", fobj, 0., 1000., 4, "VandleTimingFunction");
+    EmCalTimingFunction *fobj = new EmCalTimingFunction();
+    fobj->SetBaseline(trc.GetBaseline());
+
+    TF1 *f = new TF1("f", fobj, 0., 1000., 4, "EmCalTimingFunction");
     f->SetLineColor(kRed);
     f->SetParameters(trc.GetMaxPos(), trc.GetQdc()*0.5, 1.0, 1.0);
 
