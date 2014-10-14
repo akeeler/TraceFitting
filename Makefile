@@ -20,7 +20,7 @@ LDLIBS       += $(shell root-config --libs)
 
 
 #Set the name of the program to be compiled
-PROGRAM = test
+PROGRAM = traceFit
 
 #Define Objects
 MAINO = main.o
