@@ -26,10 +26,11 @@ PROGRAM = test
 MAINO = main.o
 VANDLETIMINGO = VandleTimingFunction.o
 EMCALTIMINGO  = EmCalTimingFunction.o
+TOKENIZERO = Tokenizer.o
 TRACEO = Trace.o
 
 #Make the object list and prefix the object directory
-OBJS = $(MAINO) $(VANDLETIMINGO) $(TRACEO) $(EMCALTIMINGO)
+OBJS = $(MAINO) $(VANDLETIMINGO) $(TRACEO) $(EMCALTIMINGO) $(TOKENIZERO)
 OBJDIR = obj
 OBJS_W_DIR = $(addprefix $(OBJDIR)/,$(OBJS))
 

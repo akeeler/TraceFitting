@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 
 #include <TApplication.h>
@@ -31,43 +32,35 @@
 #include <TF1.h>
 #include <TFitResult.h>
 
+#include "Tokenizer.hpp"
 #include "Trace.hpp"
 #include "VandleTimingFunction.hpp"
 #include "EmCalTimingFunction.hpp"
 
 using namespace std;
 
-int main() {
-    vector<double> xvals, yvals;
-
-    ifstream infile("data/plsr-1000mV-02ns-num05.dat");
-    if(!infile)
-        cerr << "Cannot open input file. Try again, son." << endl;
-    else {
-        while(infile) {
-            if (isdigit(infile.peek())) {
-                int junk, junk1, junk2;
-                infile >> junk >> junk1 >> junk2;
-                cout << junk << " " << junk1 << " " << junk2 << endl;
-                xvals.push_back(junk);
-                yvals.push_back(junk1);
-            } else
-                infile.ignore(1000,'\n');
-        }
+int main(int argc, char* argv[]) {
+    if(argc < 2) {
+        cerr << "You must provide me with a text file containing a trace!!"
+             << endl;
+        exit(2);
     }
 
-    cout << yvals.size() << endl;
+    string fileName = argv[1];
+    Tokenizer token(fileName, " ");
+    vector<double> xvals = token.GetXVals();
+    vector<double> yvals = token.GetYVals();
 
     Trace trc(yvals);
     int lo = trc.GetMaxPos() - 5;
-    int hi = trc.GetMaxPos() + 40;
+    int hi = trc.GetMaxPos() + 10;
 
-    EmCalTimingFunction *fobj = new EmCalTimingFunction();
+    VandleTimingFunction *fobj = new VandleTimingFunction();
     fobj->SetBaseline(trc.GetBaseline());
 
-    TF1 *f = new TF1("f", fobj, 0., 1000., 4, "EmCalTimingFunction");
+    TF1 *f = new TF1("f", fobj, 0., 1000., 4, "VandleTimingFunction");
     f->SetLineColor(kRed);
-    f->SetParameters(trc.GetMaxPos(), trc.GetQdc()*0.5, 1.0, 1.0);
+    f->SetParameters(lo, trc.GetQdc()*0.5, 1.0, 1.0);
 
     TGraphErrors *graph =
         new TGraphErrors(xvals.size(), &(xvals[0]), &(yvals[0]));
