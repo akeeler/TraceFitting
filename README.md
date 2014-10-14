@@ -15,11 +15,9 @@ resolution timing for VANDLE.
 Input Data Formats
 ------------------
 The program now recognizes the following data structure :
-
  * x,y
  * x,y,y_error
  * x,y,y_error,...,n
-
  Only the first two columns will be read into the program. In all of the current
  data files that I test with the x column is generally the trace sample number,
  and the y value is the amplitude of the trace at the sampling point. The
