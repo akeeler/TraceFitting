@@ -14,18 +14,18 @@
   *  along with this program.  If not, see <http://www.gnu.org/licenses/>. *
   **************************************************************************
 */
-/*! \file EmCalTimingFunction.hpp
- *  \brief A class to handle the processing of traces
+/*! \file SiPmtFastTimingFunction.hpp
+ *  \brief Definition for the fitting function for the Si PMT fast output
  *  \author S. V. Paulauskas
- *  \date 03 October 2014
+ *  \date 14 October 2014
  */
-#ifndef __EMCALTIMINGFUNCITON__HPP__
-#define __EMCALTIMINGFUNCITON__HPP__
+#ifndef __SIPMTFASTTIMINGFUNCITON__HPP__
+#define __SIPMTFASTTIMINGFUNCITON__HPP__
 
-class EmCalTimingFunction {
+class SiPmtFastTimingFunction {
 public:
-    EmCalTimingFunction() {};
-    ~EmCalTimingFunction(){};
+    SiPmtFastTimingFunction(){};
+    ~SiPmtFastTimingFunction(){};
 
     double operator() (double *x, double *p);
 

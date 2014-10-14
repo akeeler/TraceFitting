@@ -14,23 +14,23 @@
   *  along with this program.  If not, see <http://www.gnu.org/licenses/>. *
   **************************************************************************
 */
-/*! \file EmCalTimingFunction.hpp
- *  \brief A class to handle the processing of traces
+/*! \file SiPmtFastTimingFunction.hpp
+ *  \brief Definition for the fitting function for the Si PMT fast output
  *  \author S. V. Paulauskas
- *  \date 03 October 2014
+ *  \date 14 October 2014
  */
-#ifndef __EMCALTIMINGFUNCITON__HPP__
-#define __EMCALTIMINGFUNCITON__HPP__
+#include <cmath>
 
-class EmCalTimingFunction {
-public:
-    EmCalTimingFunction() {};
-    ~EmCalTimingFunction(){};
+#include "SiPmtFastTimingFunction.hpp"
 
-    double operator() (double *x, double *p);
+double SiPmtFastTimingFunction::operator()(double *x, double *par) {
+    double phase = par[0];
+    double amp = par[1];
+    double sigma = par[2];
+    double diff = x[0] - phase;
 
-    void SetBaseline(const double &a){baseline_ = a;};
-private:
-    double baseline_;
-};
-#endif
+    double val =
+        (amp/(sigma*sqrt(2*M_PI)))*exp(-diff*diff/(2*sigma*sigma)) + baseline_;
+
+    return(val);
+}

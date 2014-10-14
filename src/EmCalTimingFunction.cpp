@@ -12,8 +12,7 @@
   *                                                                        *
   *  You should have received a copy of the GNU General Public License     *
   *  along with this program.  If not, see <http://www.gnu.org/licenses/>. *
-  **************************************************************************
-*/
+  *************************************************************************/
 /*! \file EmCalTimingFunction.hpp
  *  \brief A class to handle the processing of traces
  *  \author S. V. Paulauskas

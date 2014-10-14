@@ -14,7 +14,6 @@
   *  along with this program.  If not, see <http://www.gnu.org/licenses/>. *
   **************************************************************************
 */
-
 /*! \file main.cpp
  * \brief File containing the main function for the ROOT based trace fitting
  * \author S. V. Paulauskas
@@ -34,8 +33,10 @@
 
 #include "Tokenizer.hpp"
 #include "Trace.hpp"
-#include "VandleTimingFunction.hpp"
+
 #include "EmCalTimingFunction.hpp"
+#include "SiPmtFastTimingFunction.hpp"
+#include "VandleTimingFunction.hpp"
 
 using namespace std;
 
@@ -43,6 +44,7 @@ int main(int argc, char* argv[]) {
     if(argc < 2) {
         cerr << "You must provide me with a text file containing a trace!!"
              << endl;
+        cerr << "I suggest the following format x,y or x,y,y_err." << endl;
         exit(2);
     }
 
@@ -53,14 +55,14 @@ int main(int argc, char* argv[]) {
 
     Trace trc(yvals);
     int lo = trc.GetMaxPos() - 5;
-    int hi = trc.GetMaxPos() + 10;
+    int hi = trc.GetMaxPos() + 5;
 
-    VandleTimingFunction *fobj = new VandleTimingFunction();
+    SiPmtFastTimingFunction *fobj = new SiPmtFastTimingFunction();
     fobj->SetBaseline(trc.GetBaseline());
 
-    TF1 *f = new TF1("f", fobj, 0., 1000., 4, "VandleTimingFunction");
+    TF1 *f = new TF1("f", fobj, 0., 1.e6, 3, "SiPmtFastTimingFunction");
     f->SetLineColor(kRed);
-    f->SetParameters(lo, trc.GetQdc()*0.5, 1.0, 1.0);
+    f->SetParameters(trc.GetMaxPos(), trc.GetQdc()*0.5, 0.5);
 
     TGraphErrors *graph =
         new TGraphErrors(xvals.size(), &(xvals[0]), &(yvals[0]));

@@ -12,6 +12,7 @@
 				<Option object_output="/home/vincent/projects/c++/traceFit-root/.objs" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="data/detector1-sipmt-num002.dat" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -31,9 +32,13 @@
 		<Unit filename="Makefile" />
 		<Unit filename="README.md" />
 		<Unit filename="inc/EmCalTimingFunction.hpp" />
+		<Unit filename="inc/SiPmtFastTimingFunction.hpp" />
+		<Unit filename="inc/Tokenizer.hpp" />
 		<Unit filename="inc/Trace.hpp" />
 		<Unit filename="inc/VandleTimingFunction.hpp" />
 		<Unit filename="src/EmCalTimingFunction.cpp" />
+		<Unit filename="src/SiPmtFastTimingFunction.cpp" />
+		<Unit filename="src/Tokenizer.cpp" />
 		<Unit filename="src/Trace.cpp" />
 		<Unit filename="src/VandleTimingFunction.cpp" />
 		<Unit filename="src/main.cpp" />
