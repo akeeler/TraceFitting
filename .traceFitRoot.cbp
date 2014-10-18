@@ -8,11 +8,11 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="master">
-				<Option output="test" prefix_auto="1" extension_auto="1" />
+				<Option output="traceFit" prefix_auto="1" extension_auto="1" />
 				<Option object_output="/home/vincent/projects/c++/traceFit-root/.objs" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="data/detector1-sipmt-num002.dat" />
+				<Option parameters="data/triple-23sep-289-17-000.dat" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>

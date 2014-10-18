@@ -1,5 +1,5 @@
-Trace Fitting ROOT
-==================
+Trace Fitting in ROOT
+=====================
 Introduction
 ------------
 This program implements a version of trace fitting inside the ROOT framework.

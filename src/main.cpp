@@ -54,8 +54,8 @@ int main(int argc, char* argv[]) {
     vector<double> yvals = token.GetYVals();
 
     Trace trc(yvals);
-    int lo = trc.GetMaxPos() - 5;
-    int hi = trc.GetMaxPos() + 5;
+    double lo = xvals.at(trc.GetMaxPos() - 5);
+    double hi = xvals.at(trc.GetMaxPos() + 5);
 
     SiPmtFastTimingFunction *fobj = new SiPmtFastTimingFunction();
     fobj->SetBaseline(trc.GetBaseline());
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
     for(unsigned int i = 0; i < xvals.size(); i++)
         graph->SetPointError(i,0.0,trc.GetStandardDeviationBaseline());
 
-    graph->GetXaxis()->SetRangeUser(lo,hi);
+    graph->GetXaxis()->SetRangeUser(lo, hi);
 
     TFitResultPtr fitResults = graph->Fit(f,"MENRS", "", lo, hi);
     int fitStatus = fitResults;
