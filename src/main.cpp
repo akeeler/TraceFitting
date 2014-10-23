@@ -21,7 +21,6 @@
  */
 #include <algorithm>
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
 
@@ -53,16 +52,17 @@ int main(int argc, char* argv[]) {
     vector<double> xvals = token.GetXVals();
     vector<double> yvals = token.GetYVals();
 
-    Trace trc(yvals);
-    double lo = xvals.at(trc.GetMaxPos() - 5);
-    double hi = xvals.at(trc.GetMaxPos() + 5);
+    Trace trc(yvals, 5, 10);
+    double lo = xvals.at(trc.GetWaveformLowSampleNum());
+    double hi = xvals.at(trc.GetWaveformHighSampleNum());
+    cout << lo << " " << trc.GetMaxPos() << " " << hi << " " << endl;
 
-    SiPmtFastTimingFunction *fobj = new SiPmtFastTimingFunction();
+    VandleTimingFunction *fobj = new VandleTimingFunction();
     fobj->SetBaseline(trc.GetBaseline());
 
-    TF1 *f = new TF1("f", fobj, 0., 1.e6, 3, "SiPmtFastTimingFunction");
+    TF1 *f = new TF1("f", fobj, 0., 1.e6, 4, "VandleTimingFunction");
     f->SetLineColor(kRed);
-    f->SetParameters(trc.GetMaxPos(), trc.GetQdc()*0.5, 0.5);
+    f->SetParameters(lo, trc.GetQdc()*0.5, 0.5, 0.5);
 
     TGraphErrors *graph =
         new TGraphErrors(xvals.size(), &(xvals[0]), &(yvals[0]));

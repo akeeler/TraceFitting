@@ -27,7 +27,7 @@
 class Trace {
 public:
     Trace(){};
-    Trace(const std::vector<double> &trc);
+    Trace(const std::vector<double> &trc, const int &lo, const int &hi);
     ~Trace(){};
 
     double GetQdc(void){return(qdc_);};
