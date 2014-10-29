@@ -29,10 +29,11 @@ EMCALTIMINGO  = EmCalTimingFunction.o
 SIPMTFASTTIMINGO  = SiPmtFastTimingFunction.o
 TOKENIZERO = Tokenizer.o
 TRACEO = Trace.o
+INPUTHANDLERO = InputHandler.o
 
 #Make the object list and prefix the object directory
 OBJS = $(MAINO) $(VANDLETIMINGO) $(TRACEO) $(EMCALTIMINGO) $(TOKENIZERO)
-OBJS += $(SIPMTFASTTIMINGO)
+OBJS += $(SIPMTFASTTIMINGO) $(INPUTHANDLERO)
 OBJDIR = obj
 OBJS_W_DIR = $(addprefix $(OBJDIR)/,$(OBJS))
 

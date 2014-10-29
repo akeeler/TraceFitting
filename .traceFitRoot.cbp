@@ -12,7 +12,7 @@
 				<Option object_output="/home/vincent/projects/c++/traceFit-root/.objs" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="data/triple-23sep-289-17-001.dat" />
+				<Option parameters="data/pocketPlsr00.dat" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>

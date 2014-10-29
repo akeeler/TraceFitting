@@ -35,7 +35,7 @@
 
 using namespace std;
 
-Trace::Trace(const vector<double> &trc, const int &lo, const int &hi) {
+Trace::Trace(const std::vector<double> &trc, const int &lo, const int &hi) {
     waveformLow_ = lo;
     waveformHigh_ = hi;
     trc_ = trc;

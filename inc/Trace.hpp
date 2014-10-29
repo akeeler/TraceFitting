@@ -15,7 +15,7 @@
   **************************************************************************
 */
 
-/*! \file TraceHandler.hpp
+/*! \file Trace.hpp
  *  \brief A class to handle the processing of traces
  *  \author S. V. Paulauskas
  *  \date 27 March 2014
