@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
              << endl;
         cerr << "I suggest the following format x,y or x,y,y_err." << endl;
 
-        exit(2);
+        exit(1);
     }
 
     InputHandler input;
@@ -72,28 +72,24 @@ int main(int argc, char* argv[]) {
     case(0):
         vandleFunc = new VandleTimingFunction();
         vandleFunc->SetBaseline(trc.GetBaseline());
-        func = new TF1("func", vandleFunc, 0., 1.e6, 4,
-            "VandleTimingFunction");
+        func = new TF1("func", vandleFunc, 0., 1.e6, 4);
         func->SetParameters(lo, trc.GetQdc()*0.5, 0.5, 0.5);
         break;
     case(1):
         siFunc = new SiPmtFastTimingFunction();
         siFunc->SetBaseline(trc.GetBaseline());
-        func = new TF1("func", siFunc, 0., 1.e6, 3,
-            "SiPmtFastTimingFunction");
+        func = new TF1("func", siFunc, 0., 1.e6, 3);
         func->SetParameters(trc.GetMaxPos(), trc.GetQdc()*0.5, 0.5);
         break;
     case(2):
         emcalFunc = new EmCalTimingFunction();
         emcalFunc->SetBaseline(trc.GetBaseline());
-        func = new TF1("func", emcalFunc, 0., 1.e6, 4,
-            "EmCalTimingFunction");
+        func = new TF1("func", emcalFunc, 0., 1.e6, 4);
         func->SetParameters(lo, trc.GetQdc()*0.5, 0.5, 0.5);
     default:
         vandleFunc = new VandleTimingFunction();
         vandleFunc->SetBaseline(trc.GetBaseline());
-        func = new TF1("func", vandleFunc, 0., 1.e6, 4,
-            "VandleTimingFunction");
+        func = new TF1("func", vandleFunc, 0., 1.e6, 4);
         func->SetParameters(lo, trc.GetQdc()*0.5, 0.5, 0.5);
         break;
     }
@@ -112,6 +108,10 @@ int main(int argc, char* argv[]) {
 
     cout << "Fit Status : " << fitStatus << endl;
     cout << "QDC : " << trc.GetQdc() << endl;
+    cout << "Phase : " << func->GetParameter(0) << endl;
+    cout << "Amplitude : " << func->GetParameter(1) << endl;
+    cout << "Beta : " << func->GetParameter(2) << endl;
+    cout << "Gamma : " << func->GetParameter(3) << endl;
 
     TApplication app("app", 0, 0);
     graph->Draw();

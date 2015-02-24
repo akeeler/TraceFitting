@@ -1,12 +1,10 @@
-/*! \file
- *  \brief
- *
- *
- *  \author
- *  \date
-*/#ifndef __INPUTHANDLER_HPP__
+/*! \file InputHandler.hpp
+ *  \brief A class to handle the inputs for the trace fitting
+ *  \author S. V. Paulauskas
+ *  \date October 29, 2014
+*/
+#ifndef __INPUTHANDLER_HPP__
 #define __INPUTHANDLER_HPP__
-
 
 class InputHandler {
 public:

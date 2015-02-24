@@ -1,7 +1,5 @@
 /*! \file InputHandler.cpp
  *  \brief A class to handle the user input to the program
- *
- *
  *  \author S. V. Paulauskas
  *  \date October 29, 2014
 */

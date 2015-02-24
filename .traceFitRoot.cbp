@@ -6,15 +6,17 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="inc/;" />
 		<Build>
 			<Target title="master">
 				<Option output="traceFit" prefix_auto="1" extension_auto="1" />
 				<Option object_output="/home/vincent/projects/c++/traceFit-root/.objs" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="data/pocketPlsr00.dat" />
+				<Option parameters="data/leribssBeta/aveTrc-bot.dat" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 				<MakeCommands>
 					<Build command="$make " />
@@ -32,11 +34,16 @@
 		<Unit filename="Makefile" />
 		<Unit filename="README.md" />
 		<Unit filename="inc/EmCalTimingFunction.hpp" />
+		<Unit filename="inc/InputHandler.hpp" />
 		<Unit filename="inc/SiPmtFastTimingFunction.hpp" />
 		<Unit filename="inc/Tokenizer.hpp" />
 		<Unit filename="inc/Trace.hpp" />
 		<Unit filename="inc/VandleTimingFunction.hpp" />
+		<Unit filename="include/InputHandler.hpp">
+			<Option virtualFolder="inc/" />
+		</Unit>
 		<Unit filename="src/EmCalTimingFunction.cpp" />
+		<Unit filename="src/InputHandler.cpp" />
 		<Unit filename="src/SiPmtFastTimingFunction.cpp" />
 		<Unit filename="src/Tokenizer.cpp" />
 		<Unit filename="src/Trace.cpp" />
