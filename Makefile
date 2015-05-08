@@ -24,6 +24,7 @@ PROGRAM = traceFit
 
 #Define Objects
 MAINO = main.o
+CSIFUNCTIONO = CsiFunction.o
 VANDLETIMINGO = VandleTimingFunction.o
 EMCALTIMINGO  = EmCalTimingFunction.o
 SIPMTFASTTIMINGO  = SiPmtFastTimingFunction.o
@@ -33,7 +34,7 @@ INPUTHANDLERO = InputHandler.o
 
 #Make the object list and prefix the object directory
 OBJS = $(MAINO) $(VANDLETIMINGO) $(TRACEO) $(EMCALTIMINGO) $(TOKENIZERO)
-OBJS += $(SIPMTFASTTIMINGO) $(INPUTHANDLERO)
+OBJS += $(SIPMTFASTTIMINGO) $(INPUTHANDLERO) $(CSIFUNCTIONO)
 OBJDIR = obj
 OBJS_W_DIR = $(addprefix $(OBJDIR)/,$(OBJS))
 

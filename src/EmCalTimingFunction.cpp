@@ -27,12 +27,13 @@ double EmCalTimingFunction::operator()(double *x, double *par) {
     double amp = par[1];
     double n = par[2];
     double tau = par[3];
-    double diff = x[0] - phase;
+    double xprime = (x[0] - phase)/tau;
 
+    double val;
     if(x[0] < phase)
-        return(baseline_);
-
-    double val = amp*pow(diff/tau,n)*exp(n*(1-diff/tau)) + baseline_;
+        val = baseline_;
+    else
+        val = amp*pow(xprime,n)*exp(-xprime) + baseline_;
 
     return(val);
 }

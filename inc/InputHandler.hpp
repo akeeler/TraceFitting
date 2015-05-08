@@ -17,32 +17,25 @@ public:
     */
     unsigned int GetRangeLow() { return rangeLow_; }
     /** Set rangeLow_
-    * \param val New value to set
-    */
+    * \param val New value to set */
     void SetRangeLow(unsigned int &val) { rangeLow_ = val; }
     /** Access rangeHigh_
-    * \return The current value of rangeHigh_
-    */
+    * \return The current value of rangeHigh_ */
     unsigned int GetRangeHigh() { return rangeHigh_; }
     /** Set rangeHigh_
-    * \param val New value to set
-    */
+    * \param val New value to set */
     void SetRangeHigh(unsigned int &val) { rangeHigh_ = val; }
     /** Access funcNum_
-    * \return The current value of funcNum_
-    */
+    * \return The current value of funcNum_ */
     unsigned int GetFuncNum() { return funcNum_; }
     /** Set funcNum_
-    * \param val New value to set
-    */
+    * \param val New value to set */
     void SetFuncNum(unsigned int &val) { funcNum_ = val; }
     /** Access doFitAgain_
-    * \return The current value of doFitAgain_
-    */
+    * \return The current value of doFitAgain_ */
     bool GetDoFitAgain() { return doFitAgain_; }
     /** Set doFitAgain_
-    * \param val New value to set
-    */
+    * \param val New value to set */
     void SetDoFitAgain() { ReadRepeatFit(); }
 private:
     void ReadFunctionNumber(void);

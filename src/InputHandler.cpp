@@ -18,12 +18,11 @@ InputHandler::InputHandler() {
 void InputHandler::ReadFunctionNumber(void) {
     cout << "How about we choose a function to fit with: " << endl
          << "(0) Vandle Function" << endl << "(1) SiPmt Fast Function" << endl
-         << "(2) EmCal Function" << endl;
+         << "(2) EmCal Function" << endl << "(3) CsI Function" << endl;
     cin >> funcNum_;
 }
 
 void InputHandler::ReadFittingRange(void) {
-    unsigned int temp1, temp2;
     cout << "Now how about hooking me up with a fitting range." << endl;
     cin >> rangeLow_ >> rangeHigh_;
 }
