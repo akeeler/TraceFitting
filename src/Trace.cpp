@@ -41,7 +41,6 @@ Trace::Trace(const std::vector<double> &trc, const int &lo, const int &hi) {
     trc_ = trc;
 
     CalcMaxInfo();
-    CalcWaveformBounds();
     CalcBaselineInfo();
     CalcWaveform();
     CalcQdc();
@@ -67,6 +66,8 @@ void Trace::CalcBaselineInfo(void) {
 void Trace::CalcMaxInfo(void) {
     auto max = max_element(trc_.begin(), trc_.end());
     maxPos_ = (int)(max - trc_.begin());
+    waveformLowSampleNum_ = maxPos_ - waveformLow_;
+    waveformHighSampleNum_ = maxPos_ + waveformHigh_;
     maxVal_ = *max;
 }
 
@@ -79,9 +80,4 @@ void Trace::CalcWaveform(void) {
     for(unsigned int i = waveformLowSampleNum_;
         i <= waveformHighSampleNum_; i++)
         waveform_.push_back(trc_[i] - baseline_);
-}
-
-void Trace::CalcWaveformBounds(void) {
-    waveformLowSampleNum_ = maxPos_ - waveformLow_;
-    waveformHighSampleNum_ = maxPos_ + waveformHigh_;
 }

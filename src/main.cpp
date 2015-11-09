@@ -68,7 +68,8 @@ int main(int argc, char* argv[]) {
     Trace trc(yvals, input.GetRangeLow(), input.GetRangeHigh());
     double lo = xvals.at(trc.GetWaveformLowSampleNum());
     double hi = xvals.at(trc.GetWaveformHighSampleNum());
-    cout << lo << " " << trc.GetMaxPos() << " " << hi << " " << endl;
+    cout << "Found the maximum value between " << lo << " and " << hi << " at "
+         << trc.GetMaxPos() << "." << endl;
 
     switch(input.GetFuncNum()) {
     case(0):
@@ -111,6 +112,7 @@ int main(int argc, char* argv[]) {
     for(unsigned int i = 0; i < xvals.size(); i++)
         graph->SetPointError(i,0.0,trc.GetStandardDeviationBaseline());
 
+    cout << lo << " " << hi << endl;
     graph->GetXaxis()->SetRangeUser(lo, hi);
 
     TFitResultPtr fitResults = graph->Fit(func,"MENRS", "", lo, hi);

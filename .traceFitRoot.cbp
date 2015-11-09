@@ -12,7 +12,7 @@
 				<Option object_output="/home/vincent/projects/c++/traceFit-root/.objs" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="data/revd/csi/singleTrc/trace.dat" />
+				<Option parameters="data/revf/labr3/ksmith-labr3r6231-10082015.dat" />
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="include" />

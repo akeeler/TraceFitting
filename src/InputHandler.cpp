@@ -23,7 +23,7 @@ void InputHandler::ReadFunctionNumber(void) {
 }
 
 void InputHandler::ReadFittingRange(void) {
-    cout << "Now how about hooking me up with a fitting range." << endl;
+    cout << "Now how about giving me the range for the waveform." << endl;
     cin >> rangeLow_ >> rangeHigh_;
 }
 
