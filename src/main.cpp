@@ -119,11 +119,11 @@ int main(int argc, char* argv[]) {
     int fitStatus = fitResults;
 
     cout << "Fit Status : " << fitStatus << endl;
-    //cout << "QDC : " << trc.GetQdc() << endl;
-    //cout << "Phase : " << func->GetParameter(0) << endl;
-    //cout << "Amplitude : " << func->GetParameter(1) << endl;
-    //cout << "Beta : " << func->GetParameter(2) << endl;
-    //cout << "Gamma : " << func->GetParameter(3) << endl;
+    cout << "QDC : " << trc.GetQdc() << endl;
+    cout << "Phase : " << func->GetParameter(0) << endl;
+    cout << "Amplitude : " << func->GetParameter(1) << endl;
+    cout << "Beta : " << func->GetParameter(2) << endl;
+    cout << "Gamma : " << func->GetParameter(3) << endl;
 
     TApplication app("app", 0, 0);
     graph->Draw();
